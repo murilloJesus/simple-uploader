@@ -11,7 +11,7 @@
     const formData = new FormData()
     formData.append("file", file)
 
-    axios.post('http://files.web15f89.uni5.net/upload')
+    axios.post('http://127.0.0.1:8000/api/upload', formData)
     .then(response => {
       files.push(response.data.path)
     })
