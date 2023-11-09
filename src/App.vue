@@ -9,19 +9,28 @@
 
     const formData = new FormData()
     formData.append("file", file)
-    formData.append("id_aplication", 1) 
+    formData.append("id_aplication", 2) 
 
-    axios.post('http://localhost:8000/api/upload', formData)
+    // PRECISA TROCAR PELO DO PROOD
+    const accessToken = 'TOKEN TESTE';
+
+    
+    axios.post('http://localhost:8000/api/upload', formData, {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data',
+        },
+    })
     .then(response => {
-      files.push(response.data.path)
+        files.push(response.data.path)
     })
     .catch(error => {
-      alert("Erro")
-      console.log(error)
+        alert("Erro")
+        console.log(error)
     })
   }
-
 </script>
+
 
 
 <template>
