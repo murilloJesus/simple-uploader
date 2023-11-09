@@ -9,18 +9,21 @@
 
     const formData = new FormData()
     formData.append("file", file)
-    formData.append("id_aplication", 1) 
+    formData.append("id_aplication", 2) 
 
-    axios.post('http://localhost:8000/api/upload', formData)
+   
+    const accessToken = 'TESTE DO TOKEN ACCESS';
+
+
+    axios.post('http://files.web15f89.uni5.net/upload')
     .then(response => {
-      files.push(response.data.path)
+        files.push(response.data.path)
     })
     .catch(error => {
-      alert("Erro")
-      console.log(error)
+        alert("Erro")
+        console.log(error)
     })
   }
-
 </script>
 
 
