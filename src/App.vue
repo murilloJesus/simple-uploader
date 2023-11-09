@@ -2,7 +2,6 @@
   import { reactive } from 'vue';
   import axios from 'axios'
 
-
   const files = reactive([])
 
   function send(event) {
@@ -10,18 +9,28 @@
 
     const formData = new FormData()
     formData.append("file", file)
+    formData.append("id_aplication", 2) 
 
-    axios.post('http://files.web15f89.uni5.net/upload')
+   
+    const accessToken = 'TESTE DO TOKEN ACCESS';
+
+
+    axios.post('http://localhost:8000/api/upload', formData, {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data',
+        },
+    })
     .then(response => {
-      files.push(response.data.path)
+        files.push(response.data.path)
     })
     .catch(error => {
-      alert("Erro")
-      console.log(error)
+        alert("Erro")
+        console.log(error)
     })
   }
-
 </script>
+
 
 <template>
   <div class="container">
@@ -29,6 +38,7 @@
       <div class="border border-secondary rounded p-3 w-50">
         <label class="form-label" for="file-uploader">Adicionar arquivos</label>
         <input type="file" @change="send" class="form-control" id="file-uploader" />
+        
       </div>
     </div>
     <div class="d-flex justify-content-center mt-3 w-100">
